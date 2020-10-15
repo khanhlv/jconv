@@ -1,109 +1,39 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
-	<title>Unicode Characters to Java Entities Converter</title>
+	<title>Unicode Characters to Java Entities Converter Online</title>
 	<link rel="dns-prefetch" href="//www.googletagservices.com" />
 	<link rel="dns-prefetch" href="//www.googletagmanager.com" />
 	<link rel="dns-prefetch" href="//www.google-analytics.com" />
-	<link rel="canonical" href="https://converter.codethoi.com/" />
+	<link rel="canonical" href="https://jconv.codethoi.com/" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Unicode Characters Converter">
+	<meta name="description" content="A online utility to convert Unicode characters to Java entities and back">
 	<meta NAME="keywords" CONTENT="Công cụ chuyển đổi ký tự Unicode sang Java Entities, Unicode text converter, tieng viet, china, converter, Unicode , Characters Converter, java,  Unicode Characters to Java Entities Converter">
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Công cụ chuyển đổi ký tự Unicode sang Java Entities" />
+	<meta property="og:title" content="Unicode Characters to Java Entities Converter Online" />
 	<link rel="apple-touch-icon" sizes="180x180" href="https://codethoi.com/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="https://codethoi.com/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="https://codethoi.com/favicon-16x16.png">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<style type="text/css">
-		body {
-		  font-family: Aria;
-		  background-color: #222;
-		  color: #000;
-		  margin: 1em 5em;
-		  text-align: justify;
-		}
-		.controls {
-		  text-align: center;
-		  clear: both;
-		  padding: 1em;      
-		}
-		div.controls span {
-		  display: block;
-		  font-weight: bold;
-		}
-		div.controls select {
-		  margin-bottom: 6px;
-		}
-		.editor {
-		  float: left;
-		  width: 50%;
-		}
-		.editor textarea {
-		  width: 92%;
-		  margin: 0.5ex 4%;
-		}
-		div.editor {
-		  font-weight: bold;
-		}
-		h1,h2 {
-		  font-weight: bold;
-		}
-		h1 {
-		  margin: 0; 
-		  font-size: 170%;
-		  background-color: #444;
-		  padding: 6px 6px 0px 6px;
-		  color: #FFF;
-		}
-		h1 span {
-		  background-color: #AAA;
-		  padding: 0 6px;
-		  color: #000;
-		}
-		h2 {
-		  font-size: 70%;
-		  letter-spacing: 0.25em;
-		  margin-top: 0;
-		  margin-bottom: 0;      
-		  text-align: right;
-		  color: #000;
-		  background-color: #444;      
-		  padding-right: 6px;
-		  padding-bottom: 4px;
-		  border-bottom: 8px solid #CC3300;
-		}
-		#author {
-		  text-align: right;
-		  font-weight: bolder;
-		  color: #000;
-		  font-size: 80%;
-		  margin-bottom: 1ex;
-		}
-		#author a {
-		  color: #000;
-		  text-decoration: none;
-		}
-		#author a:hover {
-		  text-decoration: underline;
-		}
-		#page {
-		  border: 6px solid #333;
-		}
-		#content {
-		  background-color: #AAA;
-		  padding: 6px;
-		}
-		p {
-		  margin-top: 0;
-		  margin-bottom: 0.5ex;
-		}
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<meta name="google-site-verification" content="wo64O86TdUrMxfsofpwf5VlbUIjjvXHZzDY5abf0ts0" />
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-180627416-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-180627416-1');
+	</script>
+
+	<script src="assets/js/main.js"></script> 
+	<style>
 		#search_tags {
 		  list-style: none;
 		  margin: 0;
+		  padding: 0px;
 		  font-size: 10px;
 		  color: #888;
 		  text-align: center;
@@ -113,116 +43,74 @@
 		  padding: 0 4px;
 		  border-right: 1px solid #888;
 		}
-	</style> 
-
-	<script type="text/javascript"> 
-  
-	  function strlenFix(str) {
-		while (str.length<4) str="0"+str;
-		
-		console.log(str);
-		return str;
-	  }
-	  
-	  function convert() {
-		var result = '';
-		var source = document.forms["conversion"].elements["input"].value; 
-		
-		if (document.forms["conversion"].elements["direction"].value=="0") {
-		  
-		  /* UTF-8 to entities */
-		  for (i=0; i<source.length; i++) {
-			charCode = source.charCodeAt(i);
-			
-			if (charCode <= 127) {
-			  result += source.charAt(i);
-			} else {
-			  result += '\\u' + strlenFix(charCode.toString(16).toUpperCase());
-			} 
-		  }
-		
-		} else {
-		
-		  var state=0;
-		  var chars=0;
-		  var value="";
-		  /* entities to UTF-8 */
-		  for (i=0; i<source.length; i++) {
-			switch (state) {
-			  case 0:
-				if (source.charAt(i)=='\\') {
-				  state=1;
-				} else {
-				  result+=source.charAt(i);
-				}
-			  break;
-			  case 1:
-				if (source.charAt(i)=='u') {
-				  state=2;
-				  chars=0;
-				  value="";
-				} else {
-				  result+='\\'+source.charAt(i);
-				  state = 0;
-				}
-			  break;
-			  case 2:
-				chars++;
-				value+=source.charAt(i);
-				if (chars>=4) {
-				  result+=unescape("%u"+value);
-				  state=0;
-				}
-			  break;
-			}
-		  }
-		
+		#search_tags li a {
+			color: #888;
 		}
 		
-		document.forms["conversion"].elements["output"].value=result;
-		
-	  } 
-
-	</script> 
+		.form-control {
+			border-radius: 0px;
+		}
+	</style>
 </head>
 <body>
-<div id="page">
-	<h1>Unicode Characters to Java Entities Converter</h1> 
-	<h2>A online utility to convert Unicode characters to Java entities and back</h2>
-	<div id="content">
-		<p>Programming in Java? Need czech, russian, chinese or other characters? Use this to convert string to Java entities.</p>
-		<p>Java code <code>System.out.println("\u017Elu\u0165ou\u010Dk\u00FD k\u016F\u0148");</code> writes to stdout string <i>žluťoučký kůň</i>.</p>
-		<form name="conversion" action="/" onsubmit="convert();return false;">
-			<div class="editor">
-			<div>Input:</div>
-			<textarea name="input" cols="45" rows="15"></textarea>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12" style="padding: 0px">
+				<h1>Unicode Characters to Java Entities Converter</h1> 
+				<p>Programming in Java? Need czech, russian, chinese or other characters? Use this to convert string to Java entities.</p>
+				<p>Java code <code>System.out.println("\u017Elu\u0165ou\u010Dk\u00FD k\u016F\u0148");</code> writes to stdout string <i>žluťoučký kůň</i>.</p>
 			</div>
-			<div class="editor">
-			<div>Output:</div>
-			<textarea name="output" cols="45" rows="15" readonly></textarea>
+		</div>
+		<div class="row">
+			<form style="width: 100%;" class="col-md-12" name="conversion" action="/" onsubmit="convert();return false;">
+				<div class="row">
+					<div class="col-md-5" style="padding: 0px">
+						<div class="form-group">
+							<label>Input:</label>
+							<textarea class="form-control" name="input" cols="45" rows="15"></textarea>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<label>Direction:</label>
+							<select class="form-control" name="direction">
+								<option value="0">UTF-8 &gt;&gt; Java</option>
+								<option value="1">Java &gt;&gt; UTF-8</option> 
+							</select>
+						</div>
+						<div class="btn-group" style="width:100%" role="group">
+							<input type="submit" value="Convert" class="btn btn-primary"/>
+							<input type="reset" value="Clear"  class="btn btn-secondary" />
+						</div>
+					</div>
+					<div class="col-md-5" style="padding: 0px">
+						<div class="form-group">
+							<label>Output:</label>
+							<textarea class="form-control"  name="output" cols="45" rows="15" readonly></textarea>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="row">
+			<div class="col-md-12" style="padding: 0px">
+				<ul id="search_tags">
+					<li><a href="#Unicode character to Java entities" title="Unicode character to Java entities">Unicode character to Java entities</a></li>
+					<li><a href="#Převod unicode znaků na Java entity" title="Převod unicode znaků na Java entity">Převod unicode znaků na Java entity</a></li>
+					<li><a href="#Czech chars in Java" title="Czech chars in Java">Czech chars in Java</a></li>
+					<li><a href="#České znaky v Javě" title="České znaky v Javě">České znaky v Javě</a></li>
+					<li><a href="#Czech in Java" title="Czech in Java">Czech in Java</a></li>
+					<li><a href="#Čeština v Javě" title="Čeština v Javě">Čeština v Javě</a></li>
+					<li><a href="#Vietnamese in Java" title="Vietnamese in Java">Vietnamese in Java</a></li>
+					<li><a href="#Russian in Java" title="Russian in Java">Russian in Java</a></li>
+					<li><a href="#China in Java" title="China in Java">China in Java</a></li>
+					<li><a href="#Escape sequence \uxxxx" title="Escape sequence \uxxxx">Escape sequence \uxxxx</a></li>
+					<li><a href="#Escape sekvence \uxxxx" title="Escape sekvence \uxxxx">Escape sekvence \uxxxx</a></li>
+					<li><a href="#Java text conversion tool" title="Java text conversion tool">Java text conversion tool</a></li>
+					<li><a href="#Konverze textu v Javě" title="Konverze textu v Javě">Konverze textu v Javě</a></li>
+				</ul>
 			</div>
-			<div class="controls">
-			<span>Direction:</span>
-			<select name="direction">
-			<option value="0">UTF-8 text &gt;&gt; Java entities</option>
-			<option value="1">Java entities &gt;&gt; UTF-8 text</option> 
-			</select><br />
-			<input type="submit" value="Convert" /> <input type="reset" value="Clear" />
-			</div> 
-		</form>
-		<ul id="search_tags">
-			<li>Unicode character to Java entities</li>
-			<li>Převod unicode znaků na Java entity</li>
-			<li>Czech chars in Java</li>
-			<li>České znaky v Javě</li>
-			<li>Czech in Java</li>
-			<li>Čeština v Javě</li>
-			<li>Escape sequence \uxxxx</li>
-			<li>Escape sekvence \uxxxx</li>
-			<li>Java text conversion tool</li>
-			<li>Konverze textu v Javě</li>
-		</ul>
+		</div>
 	</div>
-</div>
 </body>
 </html>
